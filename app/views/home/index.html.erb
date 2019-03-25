@@ -2,8 +2,9 @@
 <p>Enter stations graph to get started:</p>
 <p>You can also upload a .txt file</p>
 
-<%= form_tag("/result", method: "get") do %>
+<%= form_tag("/result", multipart: "true") do %>
   <%= label_tag(:graph, "Station Graph") %>
   <%= text_field_tag(:graph) %>
+  <%= file_field_tag(:uploaded_file) %>
   <%= submit_tag("Calculate") %>
 <% end %>

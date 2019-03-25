@@ -3,8 +3,11 @@ class HomeController < ApplicationController
   end
 
   def result
-    # input = params[:graph].split(", ")
-    input = "AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7".split(", ")
+    input = params[:graph].split(", ")
+    if params[:uploaded_file].present?
+      input = File.read(params[:uploaded_file].tempfile).split(", ")
+    end
+    # input = "AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7".split(", ")
     @graph = Hash[input.collect { |n| [n[0..1], n[2].to_i] }]
 
     # Output #1: 9
