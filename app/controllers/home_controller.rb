@@ -47,7 +47,7 @@ class HomeController < ApplicationController
     end
 
     # Output #6: 2
-      def calcRoutes6(startStop, stopCount = 1)
+      def funcation_calcRoutes6(startStop, stopCount = 1)
         if startStop[1] == "C"
           return true
         end
