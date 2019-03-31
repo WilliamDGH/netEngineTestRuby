@@ -47,7 +47,7 @@ class HomeController < ApplicationController
     end
 
     # Output #6: 2
-      def funcation_calcRoutes6(startStop, stopCount = 1)
+      def funcation_number_of_trips_between_C_and_C(startStop, stopCount = 1)
         if startStop[1] == "C"
           return true
         end
@@ -57,19 +57,19 @@ class HomeController < ApplicationController
           return
         else
           routes.map do |stop|
-            calcRoutes6(stop, stopCount)
+            funcation_number_of_trips_between_C_and_C(stop, stopCount)
           end
         end
       end
 
       startStops6 = @graph.keys.select { |route| route[0] == "C" }
       @output6 = startStops6.map do |startStop|
-        calcRoutes6(startStop)
+        funcation_number_of_trips_between_C_and_C(startStop)
       end
       @output6 = @output6.flatten.count(true)
 
     # Output #7: 3
-    def calcRoutes7(startStop, stopCount = 1)
+    def funcation_number_of_trips_between_A_and_C(startStop, stopCount = 1)
       if startStop[1] == "C" && stopCount == 4
         return true
       end
@@ -79,18 +79,18 @@ class HomeController < ApplicationController
         return
       else
         routes.map do |stop|
-          calcRoutes7(stop, stopCount)
+          funcation_number_of_trips_between_A_and_C(stop, stopCount)
         end
       end
     end
     startStops7 = @graph.keys.select { |route| route[0] == "A" }
     @output7 = startStops7.map do |startStop|
-      calcRoutes7(startStop)
+      funcation_number_of_trips_between_A_and_C(startStop)
     end
     @output7 = @output7.flatten.count(true)
 
     # Output #8: 9
-    def calcRoutes8(startStop, endStation, distance = 0, stopCount = 0)
+    def funcation_shortest_route(startStop, endStation, distance = 0, stopCount = 0)
       distance += @graph[startStop]
       stopCount += 1
       if startStop[1] == endStation
@@ -100,25 +100,25 @@ class HomeController < ApplicationController
       else
         routes = @graph.keys.select { |route| route[0] == startStop[1] }
         routes.map do |stop|
-          calcRoutes8(stop, endStation, distance, stopCount)
+          funcation_shortest_route(stop, endStation, distance, stopCount)
         end
       end
     end
     startStops8 = @graph.keys.select { |route| route[0] == "A" }
     @output8 = startStops8.map do |startStops|
-      calcRoutes8(startStops, "C")
+      funcation_shortest_route(startStops, "C")
     end
     @output8 = @output8.flatten.min
 
     # Output #9: 9
     startStops9 = @graph.keys.select { |route| route[0] == "B" }
     @output9 = startStops9.map do |startStops|
-      calcRoutes8(startStops, "B")
+      funcation_shortest_route(startStops, "B")
     end
     @output9 = @output9.flatten.min
 
     # Output #10: 7
-    def calcRoutes10(startStop, distance = 0)
+    def funcation_number_of_different_routes(startStop, distance = 0)
       distance += @graph[startStop]
       if distance >= 30
         return
@@ -127,14 +127,14 @@ class HomeController < ApplicationController
       end
         routes = @graph.keys.select { |route| route[0] == startStop[1] }
         routes.map do |stop|
-          calcRoutes10(stop, distance)
+          funcation_number_of_different_routes(stop, distance)
       end
     end
 
     @result = []
     startStops10 = @graph.keys.select { |route| route[0] == "C" }
     startStops10.map do |startStops|
-      calcRoutes10(startStops)
+      funcation_number_of_different_routes(startStops)
     end
     @output10 = @result.size
 
